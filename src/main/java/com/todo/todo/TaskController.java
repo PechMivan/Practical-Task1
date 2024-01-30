@@ -12,8 +12,12 @@ import java.util.Optional;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
+    private final TaskServiceImpl taskService;
+
     @Autowired
-    private TaskServiceImpl taskService;
+    public TaskController(TaskServiceImpl taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {

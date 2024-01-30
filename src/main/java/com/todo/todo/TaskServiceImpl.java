@@ -9,8 +9,13 @@ import java.util.Optional;
 @Service
 public class TaskServiceImpl implements TaskService {
 
+
+    private final TaskRepository taskRepository;
+
     @Autowired
-    private TaskRepository taskRepository;
+    public TaskServiceImpl(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     public List<Task> getAllTasks() {
         return (List<Task>) taskRepository.findAll();

@@ -29,7 +29,7 @@ public class TaskServiceTests {
     }
 
     @Test
-    public void testGetAllTasks() {
+    void testGetAllTasks() {
         // Arrange
         when(taskRepository.findAll()).thenReturn(Arrays.asList(
                 new Task(1L, "Task 1", "Description 1", false),
@@ -45,7 +45,7 @@ public class TaskServiceTests {
     }
 
     @Test
-    public void testGetTaskById() {
+    void testGetTaskById() {
         // Arrange
         when(taskRepository.findById(1L)).thenReturn(Optional.of(new Task(1L, "Task 1", "Description 1", false)));
 
@@ -59,7 +59,7 @@ public class TaskServiceTests {
     }
 
     @Test
-    public void testCreateTask() {
+    void testCreateTask() {
         // Arrange
         Task newTask = new Task(1L,"New Task", "New Description", false);
         when(taskRepository.save(any(Task.class))).thenReturn(new Task(1L, "New Task", "New Description", false));
@@ -74,7 +74,7 @@ public class TaskServiceTests {
     }
 
     @Test
-    public void testUpdateTask_Success() {
+    void testUpdateTask() {
         // Arrange
         Long taskId = 1L;
         Task existingTaskInDb = new Task(1L, "Old Title", "Old Description", false);
@@ -93,7 +93,7 @@ public class TaskServiceTests {
     }
 
     @Test
-    public void testDeleteTask() {
+    void testDeleteTask() {
         // Arrange
         doNothing().when(taskRepository).deleteById(1L);
 

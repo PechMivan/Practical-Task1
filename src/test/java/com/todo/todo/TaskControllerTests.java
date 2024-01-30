@@ -4,18 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -24,11 +20,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(TaskController.class)
 public class TaskControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private final MockMvc mockMvc;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    TaskControllerTests(MockMvc mockMvc, ObjectMapper objectMapper){
+        this.mockMvc = mockMvc;
+        this.objectMapper = objectMapper;
+    }
 
     @MockBean
     private TaskServiceImpl taskService;
@@ -42,7 +41,7 @@ public class TaskControllerTests {
     }
 
     @Test
-    public void testGetTaskById() throws Exception {
+    void testGetTaskById() throws Exception {
         // Arrange
         when(taskService.getTaskById(1L)).thenReturn(Optional.of(new Task(1L, "Task 1", "Description 1", false)));
 
@@ -58,7 +57,7 @@ public class TaskControllerTests {
     }
 
     @Test
-    public void testCreateTask() throws Exception {
+    void testCreateTask() throws Exception {
         // Arrange
         Task newTask = new Task(1L,"New Task", "New Description", false);
         when(taskService.createTask(any(Task.class))).thenReturn(new Task(1L, "New Task", "New Description", false));
@@ -94,7 +93,7 @@ public class TaskControllerTests {
     }
 
     @Test
-    public void testDeleteTask() throws Exception {
+    void testDeleteTask() throws Exception {
         // Arrange
         doNothing().when(taskService).deleteTask(1L);
 
