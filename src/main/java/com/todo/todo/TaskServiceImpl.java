@@ -29,17 +29,13 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> existingTask = taskRepository.findById(taskId);
 
         if (existingTask.isPresent()) {
-            // Update properties of existingTask with updatedTask
             Task taskToUpdate = existingTask.get();
             taskToUpdate.setTitle(updatedTask.getTitle());
             taskToUpdate.setDescription(updatedTask.getDescription());
             taskToUpdate.setCompleted(updatedTask.isCompleted());
 
-            // Additional business logic if needed before saving
             return taskRepository.save(taskToUpdate);
         } else {
-            // Handle case where task with given ID is not found
-            // You might choose to throw an exception or handle it differently based on your requirements
             return null;
         }
     }
