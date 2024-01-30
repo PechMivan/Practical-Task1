@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Update Task</title>
+</head>
+<body>
+<h1>Update Task</h1>
+<form th:action="@{'/api/tasks/' + ${task.id}}" th:object="${task}" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" th:field="*{title}" required>
+    <br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" th:field="*{description}"></textarea>
+    <br>
+    <label for="completed">Completed:</label>
+    <input type="checkbox" id="completed" name="completed" th:field="*{completed}">
+    <br>
+    <input type="submit" value="Save">
+</form>
+<a th:href="@{/api/tasks}">Cancel</a>
+</body>
+</html>

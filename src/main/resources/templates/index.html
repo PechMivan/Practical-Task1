@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Management</title>
+</head>
+<body>
+<h1>Welcome to Task Management</h1>
+<h1>Task List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Completed</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.id}"></td>
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.completed} ? 'Yes' : 'No'"></td>
+        <td>
+            <a th:href="@{'/api/tasks/' + ${task.id} + '/delete'}"
+               onclick="return confirm('Are you sure you want to delete this task?');">
+                Delete
+            </a>
+            <a th:href="@{'/api/tasks/' + ${task.id} + '/update'}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/api/tasks/create}">Create New Task</a>
+</body>
+</html>
