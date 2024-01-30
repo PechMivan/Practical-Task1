@@ -72,6 +72,13 @@
 							<formats>
 								<format>XML</format>
 							</formats>
+							<excludes>
+								<exclude>com/todo/todo/Task</exclude>
+								<exclude>com/todo/todo/TaskService</exclude>
+								<exclude>com/todo/todo/TaskRepository</exclude>
+								<exclude>com/todo/todo/TodoApplication</exclude>
+								<exclude>**/config/*</exclude>
+							</excludes>
 						</configuration>
 					</execution>
 				</executions>
