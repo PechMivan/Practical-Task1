@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -72,9 +73,24 @@ public class TaskServiceTests {
         // Add more assertions based on your business logic
     }
 
-    // Similar tests for updateTask and deleteTask methods can be added
+    @Test
+    public void testUpdateTask_Success() {
+        // Arrange
+        Long taskId = 1L;
+        Task existingTaskInDb = new Task(1L, "Old Title", "Old Description", false);
+        Task updatedTask = new Task(1L, "New Title", "New Description", true);
 
-    // ...
+        when(taskRepository.findById(taskId)).thenReturn(Optional.of(existingTaskInDb));
+        when(taskRepository.save(Mockito.any(Task.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        Task result = taskService.updateTask(taskId, updatedTask);
+
+        // Assert
+        assertEquals(updatedTask.getTitle(), result.getTitle());
+        assertEquals(updatedTask.getDescription(), result.getDescription());
+        assertEquals(updatedTask.isCompleted(), result.isCompleted());
+    }
 
     @Test
     public void testDeleteTask() {
