@@ -8,6 +8,16 @@ Clone the project and extract it. Some configurations are needed as follow:
    - If you just want to run the application you need to configure DataSource settings.
    - If you want to run analysis too, change SonarQube configuration.
 
+## Usage
+
+This is a RESTful API so you can perform CRUD operations using the following paths:
+
+- Get all tasks: http://localhost:8080/api/tasks [GET]
+- Get one task by id: http://localhost:8080/api/tasks/{id} [GET]
+- Create one task: http://localhost:8080/api/tasks [POST]
+- Update one task by id: http://localhost:8080/api/tasks/{id} [PUT]
+- Delete one task by id: http://localhost:8080/api/tasks/{id} [DELETE]
+
 ## SonarQube Analysis
 
 ![image](https://github.com/PechMivan/Practical-Task1/assets/97990963/2feddd51-78f7-46bf-8a41-27f230da7678)
